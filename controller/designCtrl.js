@@ -31,8 +31,9 @@ const createDesign = asyncHandler(async (req, res) => {
       }
       // res.json({ fileName: `${fileName}`, filePath: `/uploads/${fileName}` });
     });
-    const host = req.hostname;
-    const filePath = process.env.BASE_URL + "/uploads/" + fileName;
+
+    const filePath = "/uploads/" + fileName;
+
     const design = await Design.create({ userId, image: filePath });
     res.status(201).json({ design });
   } catch (error) {
@@ -55,8 +56,7 @@ const getAllDesigns = asyncHandler(async (req, res) => {
 });
 
 const getSingleDesign = asyncHandler(async (req, res) => {
-
-  const {designId} = req.params
+  const { designId } = req.params;
   let design;
   try {
     design = await Design.findById(designId);
@@ -68,11 +68,9 @@ const getSingleDesign = asyncHandler(async (req, res) => {
   }
 });
 
-
 const updateDesign = asyncHandler(async (req, res) => {
-
-  const { designId } = req.params
-  console.log(req.files)
+  const { designId } = req.params;
+  console.log(req.files);
   let design;
   try {
     //file upload to localstorage
@@ -95,8 +93,7 @@ const updateDesign = asyncHandler(async (req, res) => {
       // res.json({ fileName: `${fileName}`, filePath: `/uploads/${fileName}` });
     });
     const host = req.hostname;
-    const filePath = process.env.BASE_URL + "/uploads/" + fileName;
-
+    const filePath = "/uploads/" + fileName;
 
     design = await Design.findByIdAndUpdate(
       designId,
@@ -111,11 +108,9 @@ const updateDesign = asyncHandler(async (req, res) => {
   }
 });
 
-
-
 module.exports = {
   createDesign,
   getAllDesigns,
   getSingleDesign,
-  updateDesign
+  updateDesign,
 };
