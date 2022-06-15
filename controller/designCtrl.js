@@ -32,7 +32,7 @@ const createDesign = asyncHandler(async (req, res) => {
       // res.json({ fileName: `${fileName}`, filePath: `/uploads/${fileName}` });
     });
     const host = req.hostname;
-    const filePath = req.protocol + "://" + host + "/uploads/" + fileName;
+    const filePath = process.env.BASE_URL + "/uploads/" + fileName;
     const design = await Design.create({ userId, image: filePath });
     res.status(201).json({ design });
   } catch (error) {
@@ -95,7 +95,7 @@ const updateDesign = asyncHandler(async (req, res) => {
       // res.json({ fileName: `${fileName}`, filePath: `/uploads/${fileName}` });
     });
     const host = req.hostname;
-    const filePath = req.protocol + "://" + host + "/uploads/" + fileName;
+    const filePath = process.env.BASE_URL + "/uploads/" + fileName;
 
 
     design = await Design.findByIdAndUpdate(
